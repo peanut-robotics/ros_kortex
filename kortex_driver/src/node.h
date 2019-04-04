@@ -180,6 +180,8 @@
 
 #include "kortex_driver/ApiOptions.h"
 
+#include "hardware_interface.h"
+
 using namespace std;
 using namespace Kinova::Api;
 using namespace Kinova::Api::Common;
@@ -359,5 +361,7 @@ private:
         ros::Publisher m_pub_FactoryTopic;
         ros::Publisher m_pub_NetworkTopic;
         ros::Publisher m_pub_ArmStateTopic;
+
+//        kortex_hardware_interface::KortexHardwareInterface khi;
 };
 #endif

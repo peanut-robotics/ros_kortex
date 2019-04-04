@@ -1,0 +1,60 @@
+#velocity_joint_mode_controller:
+#  type: joint_mode_controller/JointModeController
+#  joint_mode: 2 # velocity
+
+velocity_trajectory_controller:
+  type: "velocity_controllers/JointTrajectoryController"
+  joints:
+    - j2s7s300_joint_1
+    - j2s7s300_joint_2
+    - j2s7s300_joint_3
+    - j2s7s300_joint_4
+    - j2s7s300_joint_5
+    - j2s7s300_joint_6
+    - j2s7s300_joint_7
+  gains:
+    j2s7s300_joint_1: {p: 30, d: 0, i: 0.5, i_clamp: 2.0}
+    j2s7s300_joint_2: {p: 20, d: 0, i: 0.5, i_clamp: 2.0}
+    j2s7s300_joint_3: {p: 20, d: 0, i: 0.5, i_clamp: 2.0}
+    j2s7s300_joint_4: {p: 30, d: 0, i: 0.5, i_clamp: 2.0}
+    j2s7s300_joint_5: {p: 20, d: 0, i: 0.5, i_clamp: 2.0}
+    j2s7s300_joint_6: {p: 20, d: 0, i: 0.5, i_clamp: 2.0}
+    j2s7s300_joint_7: {p: 20, d: 0, i: 0.5, i_clamp: 2.0}
+
+  velocity_ff:
+    j2s7s300_joint_1: 0
+    j2s7s300_joint_2: 0
+    j2s7s300_joint_3: 0
+    j2s7s300_joint_4: 0
+    j2s7s300_joint_5: 0
+    j2s7s300_joint_6: 0
+    j2s7s300_joint_7: 0
+
+  constraints:
+    stopped_velocity_tolerance: 0.02
+    goal_time: 5.0
+    j2s7s300_joint_1:
+      goal: 0.007
+      trajectory: 0.1
+    j2s7s300_joint_2:
+      goal: 0.007
+      trajectory: 0.1
+    j2s7s300_joint_3:
+      goal: 0.007
+      trajectory: 0.1
+    j2s7s300_joint_4:
+      goal: 0.007
+      trajectory: 0.1
+    j2s7s300_joint_5:
+      goal: 0.007
+      trajectory: 0.1
+    j2s7s300_joint_6:
+      goal: 0.007
+      trajectory: 0.1
+    j2s7s300_joint_7:
+      goal: 0.007
+      trajectory: 0.1
+
+joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50

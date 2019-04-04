@@ -1,0 +1,16 @@
+<launch>
+
+    <rosparam file="$(find kinova_ros_control)/config/hardware_controllers.yaml" command="load"/>
+
+<!--    <node name="kortex_hardware_interface"-->
+<!--          pkg="kortex_driver"-->
+<!--          type="hardware_interface"-->
+<!--          output="screen">-->
+<!--    </node>-->
+
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	  output="screen" args="
+                            velocity_trajectory_controller
+                           " />
+
+</launch>
