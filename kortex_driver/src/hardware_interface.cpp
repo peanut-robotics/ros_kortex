@@ -40,29 +40,47 @@ void KortexHardwareInterface::read()
     current_state = m_basecyclic->RefreshFeedback();
     for(int i = 0; i < current_state.actuators_size(); i++)
     {
-        pos[i] = static_cast<double>(- current_state.actuators(i).position()/180.0*3.1415);
-        vel[i] = static_cast<double>(- current_state.actuators(i).velocity()/180.0*3.1415);
+        pos[i] = static_cast<double>(- current_state.actuators(i).position()/180.0*M_PI);
+        vel[i] = static_cast<double>(- current_state.actuators(i).velocity()/180.0*M_PI);
         eff[i] = static_cast<double>(current_state.actuators(i).torque());
     }
 }
 
 void KortexHardwareInterface::write()
 {
-    auto action = Action();
-    action.set_name("regular velocity write");
-    action.set_application_data("");
-
-    auto jointSpeeds = action.mutable_send_joint_speeds();
-
-    for(size_t i = 0 ; i < NDOF; ++i)
+    if(cmd != vel) // only write when commanded velocity != current velocity
     {
-        auto jointSpeed = jointSpeeds->add_joint_speeds();
-        jointSpeed->set_joint_identifier(i);
-        jointSpeed->set_value(- cmd[i]*180.0/3.1415);
-        jointSpeed->set_duration(0.0);
-    }
+        auto action = Action();
+        action.set_name("regular velocity write");
+        action.set_application_data("");
 
-    m_base->SendJointSpeedsCommmand(*jointSpeeds);
+        auto jointSpeeds = action.mutable_send_joint_speeds();
+
+        for(size_t i = 0 ; i < NDOF; ++i)
+        {
+            auto jointSpeed = jointSpeeds->add_joint_speeds();
+            jointSpeed->set_joint_identifier(i);
+            jointSpeed->set_value(- cmd[i]*180.0/M_PI);
+            jointSpeed->set_duration(0.0);
+        }
+
+        try
+        {
+            m_base->SendJointSpeedsCommmand(*jointSpeeds);
+        }
+        catch (KDetailedException& ex)
+        {
+            ROS_WARN_THROTTLE(1, "Kortex exception");
+            ROS_WARN_THROTTLE(1, "KINOVA exception error code: %d\n", ex.getErrorInfo().getError().error_code());
+            ROS_WARN_THROTTLE(1, "KINOVA exception error sub code: %d\n", ex.getErrorInfo().getError().error_sub_code());
+            ROS_WARN_THROTTLE(1, "KINOVA exception description: %s\n", ex.what());
+        }
+        catch (std::runtime_error& ex2)
+        {
+            ROS_INFO("Other Kortex exception");
+        }
+
+    }
 }
 
 ros::Time KortexHardwareInterface::get_time()
