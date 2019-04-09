@@ -5,53 +5,53 @@
 velocity_trajectory_controller:
   type: "velocity_controllers/JointTrajectoryController"
   joints:
-    - j2s7s300_joint_1
-    - j2s7s300_joint_2
-    - j2s7s300_joint_3
-    - j2s7s300_joint_4
-    - j2s7s300_joint_5
-    - j2s7s300_joint_6
-    - j2s7s300_joint_7
+    - Actuator1
+    - Actuator2
+    - Actuator3
+    - Actuator4
+    - Actuator5
+    - Actuator6
+    - Actuator7
   gains:
-    j2s7s300_joint_1: {p: 30, d: 0, i: 0.5, i_clamp: 2.0}
-    j2s7s300_joint_2: {p: 20, d: 0, i: 0.5, i_clamp: 2.0}
-    j2s7s300_joint_3: {p: 20, d: 0, i: 0.5, i_clamp: 2.0}
-    j2s7s300_joint_4: {p: 30, d: 0, i: 0.5, i_clamp: 2.0}
-    j2s7s300_joint_5: {p: 20, d: 0, i: 0.5, i_clamp: 2.0}
-    j2s7s300_joint_6: {p: 20, d: 0, i: 0.5, i_clamp: 2.0}
-    j2s7s300_joint_7: {p: 20, d: 0, i: 0.5, i_clamp: 2.0}
+    Actuator1: {p: 3, d: 0, i: 0.2, i_clamp: 2.0}
+    Actuator2: {p: 2, d: 0, i: 0.2, i_clamp: 2.0}
+    Actuator3: {p: 2, d: 0, i: 0.2, i_clamp: 2.0}
+    Actuator4: {p: 3, d: 0, i: 0.2, i_clamp: 2.0}
+    Actuator5: {p: 2, d: 0, i: 0.2, i_clamp: 2.0}
+    Actuator6: {p: 2, d: 0, i: 0.2, i_clamp: 2.0}
+    Actuator7: {p: 2, d: 0, i: 0.2, i_clamp: 2.0}
 
   velocity_ff:
-    j2s7s300_joint_1: 0
-    j2s7s300_joint_2: 0
-    j2s7s300_joint_3: 0
-    j2s7s300_joint_4: 0
-    j2s7s300_joint_5: 0
-    j2s7s300_joint_6: 0
-    j2s7s300_joint_7: 0
+    Actuator1: 0
+    Actuator2: 0
+    Actuator3: 0
+    Actuator4: 0
+    Actuator5: 0
+    Actuator6: 0
+    Actuator7: 0
 
   constraints:
     stopped_velocity_tolerance: 0.02
     goal_time: 5.0
-    j2s7s300_joint_1:
+    Actuator1:
       goal: 0.007
       trajectory: 0.1
-    j2s7s300_joint_2:
+    Actuator2:
       goal: 0.007
       trajectory: 0.1
-    j2s7s300_joint_3:
+    Actuator3:
       goal: 0.007
       trajectory: 0.1
-    j2s7s300_joint_4:
+    Actuator4:
       goal: 0.007
       trajectory: 0.1
-    j2s7s300_joint_5:
+    Actuator5:
       goal: 0.007
       trajectory: 0.1
-    j2s7s300_joint_6:
+    Actuator6:
       goal: 0.007
       trajectory: 0.1
-    j2s7s300_joint_7:
+    Actuator7:
       goal: 0.007
       trajectory: 0.1
 

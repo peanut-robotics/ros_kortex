@@ -1,6 +1,6 @@
 <launch>
 
-    <rosparam file="$(find kinova_ros_control)/config/hardware_controllers.yaml" command="load"/>
+    <rosparam file="$(find kortex_driver)/config/hardware_controllers.yaml" command="load"/>
 
 <!--    <node name="kortex_hardware_interface"-->
 <!--          pkg="kortex_driver"-->
