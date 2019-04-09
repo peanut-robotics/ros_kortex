@@ -27,17 +27,19 @@ namespace kortex_hardware_interface
     KortexHardwareInterface(BaseClient* pBase, BaseCyclicClient* pBaseCyclic);
     void read();
     void write();
+    void update();
     ros::Time get_time();
     ros::Duration get_period();
     ~KortexHardwareInterface();
   private:
     ros::Time last_time;
+    controller_manager::ControllerManager* cm;
     hardware_interface::JointStateInterface jnt_state_interface;
     hardware_interface::VelocityJointInterface jnt_vel_interface;
     BaseClient* m_base;
     BaseCyclicClient* m_basecyclic;
 
-    std::vector<std::string> joint_names = {"j2s7s300_joint_1", "j2s7s300_joint_2","j2s7s300_joint_3", "j2s7s300_joint_4","j2s7s300_joint_5", "j2s7s300_joint_6","j2s7s300_joint_7"};
+    std::vector<std::string> joint_names = {"Actuator1", "Actuator2","Actuator3", "Actuator4","Actuator5", "Actuator6","Actuator7"};
     int NDOF = joint_names.size();
     double cmd[7];
     double pos[7];

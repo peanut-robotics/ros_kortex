@@ -333,6 +333,8 @@ class BaseServices
         bool SetCountryCode(kortex_driver::SetCountryCode::Request  &req, kortex_driver::SetCountryCode::Response &res);
         bool GetCountryCode(kortex_driver::GetCountryCode::Request  &req, kortex_driver::GetCountryCode::Response &res);
 
+        kortex_hardware_interface::KortexHardwareInterface* khi;
+
 
 private:
     	TransportClientUdp* m_transport;
@@ -362,6 +364,5 @@ private:
         ros::Publisher m_pub_NetworkTopic;
         ros::Publisher m_pub_ArmStateTopic;
 
-//        kortex_hardware_interface::KortexHardwareInterface khi;
 };
 #endif

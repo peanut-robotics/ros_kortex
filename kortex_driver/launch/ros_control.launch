@@ -10,7 +10,7 @@
 
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
 	  output="screen" args="
-                            velocity_trajectory_controller
+                            velocity_trajectory_controller joint_state_controller
                            " />
 
 </launch>

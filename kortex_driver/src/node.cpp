@@ -61,8 +61,8 @@ BaseServices::BaseServices(char* ip, ros::NodeHandle& n) : m_n(n)
 	m_pub_ArmStateTopic = m_n.advertise<kortex_driver::ArmStateNotification>("ArmStateTopic", 1000);std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 
     // set up robot hardware interface for ros_control package
-//    khi = new kortex_hardware_interface::KortexHardwareInterface(m_base, m_basecyclic);
-    kortex_hardware_interface::KortexHardwareInterface KHI = kortex_hardware_interface::KortexHardwareInterface(m_base, m_basecyclic);
+    khi = new kortex_hardware_interface::KortexHardwareInterface(m_base, m_basecyclic);
+//    kortex_hardware_interface::KortexHardwareInterface KHI = kortex_hardware_interface::KortexHardwareInterface(m_base, m_basecyclic);
 
 }
 

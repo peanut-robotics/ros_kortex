@@ -4,7 +4,6 @@ using namespace kortex_hardware_interface;
 
 KortexHardwareInterface::KortexHardwareInterface(BaseClient* pBase, BaseCyclicClient* pBaseCyclic) : m_base(pBase), m_basecyclic(pBaseCyclic)
 {
-    std::cout << "hello achille" << std::endl;
     for (std::size_t i = 0; i < NDOF; ++i)
     {
         // connect and register the joint state interface
@@ -19,22 +18,20 @@ KortexHardwareInterface::KortexHardwareInterface(BaseClient* pBase, BaseCyclicCl
     registerInterface(&jnt_state_interface);
     registerInterface(&jnt_vel_interface);
 
-//    ros::Time::init();  // not in a ROS node so need to initialize
     last_time = ros::Time::now();
 
-    ros::AsyncSpinner spinner(1);
-    spinner.start();
+    cm = new controller_manager::ControllerManager(&*this);
 
-    controller_manager::ControllerManager cm(&*this);
+    // don't continue until ros control is up so we don't write stray commands
+    ROS_DEBUG("Waiting for the controller spawner to be up...");
+    ros::service::waitForService("/controller_spawner/get_loggers");
+    ROS_DEBUG("Found controller spawner.");
 
-    ros::Rate loop_rate(40);
-    while (ros::ok())
-    {
-        this->read();
-        cm.update(this->get_time(), this->get_period());
-        this->write();
-        loop_rate.sleep();
-    }
+}
+
+void KortexHardwareInterface::update()
+{
+    cm->update(this->get_time(), this->get_period());
 }
 
 void KortexHardwareInterface::read()
