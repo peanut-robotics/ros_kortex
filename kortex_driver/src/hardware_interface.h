@@ -44,6 +44,7 @@ namespace kortex_hardware_interface
     std::vector<std::string> joint_names = {"Actuator1", "Actuator2","Actuator3", "Actuator4","Actuator5", "Actuator6","Actuator7"};
     int NDOF = joint_names.size();
     double cmd[7];
+    double prev_cmd[7];
     double pos[7];
     double vel[7];
     double eff[7];

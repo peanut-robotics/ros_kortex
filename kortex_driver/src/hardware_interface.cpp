@@ -48,7 +48,8 @@ void KortexHardwareInterface::read()
 
 void KortexHardwareInterface::write()
 {
-    if(cmd != vel) // only write when commanded velocity != current velocity
+    double thr = 0.001;
+    if((abs(cmd[0] - prev_cmd[0]) > thr) || (abs(cmd[1] - prev_cmd[1]) > thr) || (abs(cmd[2] - prev_cmd[2]) > thr) || (abs(cmd[3] - prev_cmd[3]) > thr) || (abs(cmd[4] - prev_cmd[4]) > thr) || (abs(cmd[5] - prev_cmd[5]) > thr) || (abs(cmd[6] - prev_cmd[6]) > thr)) // only write when commanded velocity != current velocity
     {
         auto action = Action();
         action.set_name("regular velocity write");
@@ -80,6 +81,11 @@ void KortexHardwareInterface::write()
             ROS_INFO("Other Kortex exception");
         }
 
+    }
+
+    for(std::size_t ind = 0; ind < NDOF; ++ind)
+    {
+        prev_cmd[ind] = cmd[ind];
     }
 }
 
