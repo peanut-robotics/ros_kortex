@@ -20,11 +20,12 @@ KortexHardwareInterface::KortexHardwareInterface(BaseClient* pBase, BaseCyclicCl
 
     last_time = ros::Time::now();
 
-    cm = new controller_manager::ControllerManager(&*this);
+    ros::NodeHandle nh_khi("arm/control");
+    cm = new controller_manager::ControllerManager(&*this, nh_khi);
 
     // don't continue until ros control is up so we don't write stray commands
     ROS_DEBUG("Waiting for the controller spawner to be up...");
-    ros::service::waitForService("/controller_spawner/get_loggers");
+    ros::service::waitForService("/arm/control/controller_spawner/get_loggers");
     ROS_DEBUG("Found controller spawner.");
 
 }
