@@ -1,16 +1,22 @@
 <launch>
 
-    <rosparam file="$(find kortex_driver)/config/hardware_controllers.yaml" command="load"/>
+    <group ns="arm/control">
 
-<!--    <node name="kortex_hardware_interface"-->
-<!--          pkg="kortex_driver"-->
-<!--          type="hardware_interface"-->
-<!--          output="screen">-->
-<!--    </node>-->
+        <rosparam file="$(find kortex_driver)/config/hardware_controllers.yaml" command="load"/>
 
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-	  output="screen" args="
-                            velocity_trajectory_controller joint_state_controller
-                           " />
+    <!--    <node name="kortex_hardware_interface"-->
+    <!--          pkg="kortex_driver"-->
+    <!--          type="hardware_interface"-->
+    <!--          output="screen">-->
+    <!--    </node>-->
+
+        <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" args="
+                                velocity_trajectory_controller joint_state_controller
+                               ">
+<!--            <remap from="/joint_states" to="manipulator/joint_states"/>-->
+        </node>
+
+    </group>
 
 </launch>
