@@ -91,7 +91,7 @@
     <child
       link="Shoulder_Link" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       effort="39"
       velocity="0.8727" />
@@ -147,7 +147,7 @@
     <child
       link="HalfArm1_Link" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       lower="-2.2"
       upper="2.2"
@@ -205,7 +205,7 @@
     <child
       link="HalfArm2_Link" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       effort="39"
       velocity="0.8727" />
@@ -261,7 +261,7 @@
     <child
       link="ForeArm_Link" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       lower="-2.5656"
       upper="2.5656"
@@ -319,7 +319,7 @@
     <child
       link="SphericalWrist1_Link" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       effort="9"
       velocity="0.8727" />
@@ -375,7 +375,7 @@
     <child
       link="SphericalWrist2_Link" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       lower="-2.05"
       upper="2.05"
@@ -433,7 +433,7 @@
     <child
       link="Bracelet_Link" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       effort="9"
       velocity="0.8727" />
