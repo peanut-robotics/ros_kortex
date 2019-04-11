@@ -1,14 +1,19 @@
 <launch>
 
-    <arg name="ip_address" default="192.168.1.10"/>
-    <arg name="rate" default="100"/>
+    <arg name="ip_address" default="192.168.1.10" doc="only set when independent"/>
+    <arg name="rate" default="100" doc="controller rate. only set when independent"/>
+    <arg name="independent" default="false" doc="if independent, launch robot_model and kortex_driver"/>
 
     <node name="kortex_driver"
+          if="$(arg independent)"
           pkg="kortex_driver"
           type="kortex_driver"
           output="screen"
           args="$(arg ip_address) $(arg rate)">
     </node>
+    <param name="robot_description"
+           if="$(arg independent)"
+           textfile="$(find kortex_description)/urdf/JACO3_URDF_V11.urdf" />
 
     <group ns="manipulation/control">
         <rosparam file="$(find kortex_driver)/config/hardware_controllers.yaml" command="load"/>
