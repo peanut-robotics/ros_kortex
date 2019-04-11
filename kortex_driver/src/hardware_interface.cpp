@@ -42,7 +42,7 @@ void KortexHardwareInterface::read()
     current_state = m_basecyclic->RefreshFeedback();
     for(int i = 0; i < current_state.actuators_size(); i++)
     {
-        pos[i] = static_cast<double>(- current_state.actuators(i).position()/180.0*M_PI);
+        pos[i] = angles::normalize_angle(static_cast<double>(- current_state.actuators(i).position()/180.0*M_PI));
         vel[i] = static_cast<double>(- current_state.actuators(i).velocity()/180.0*M_PI);
         eff[i] = static_cast<double>(current_state.actuators(i).torque());
     }

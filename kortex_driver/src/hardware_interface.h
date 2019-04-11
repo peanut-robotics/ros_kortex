@@ -16,6 +16,7 @@
 #include "ros/time.h"
 #include "ros/duration.h"
 #include <ros/console.h>
+#include "angles/angles.h"
 
 using namespace Kinova::Api;
 using namespace Kinova::Api::BaseCyclic;
