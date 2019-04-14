@@ -46,18 +46,4 @@ fi
 
 rm -rf kortex_api/ kortex_api-1.1.6.zip
 
-. /opt/ros/kinetic/setup.bash
-RESULT=$?
-if [ "${RESULT}" -ne 0 ]; then
-    echo "ERROR while sourcing /opt/ros/kinetic/setup.bash. code = ${RESULT}"
-    exit $?
-fi
-
-catkin_make
-RESULT=$?
-if [ "${RESULT}" -ne 0 ]; then
-    echo "ERROR while executing catkin_make. code = ${RESULT}"
-    exit $?
-fi
-
 exit ${RESULT}
