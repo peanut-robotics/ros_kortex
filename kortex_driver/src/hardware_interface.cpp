@@ -24,7 +24,7 @@ KortexHardwareInterface::KortexHardwareInterface(BaseClient* pBase, BaseCyclicCl
 
     // don't continue until ros control is up so we don't write stray commands
     ROS_DEBUG("Waiting for the controller spawner to be up...");
-    ros::service::waitForService("/oil/manipulation/controller_spawner/get_loggers");
+    ros::service::waitForService("/resources/manipulation/control/controller_spawner/get_loggers");
     ros::Duration(0.5).sleep(); // short sleep to allow controller to come up
     ROS_DEBUG("Found controller spawner.");
 
