@@ -192,7 +192,7 @@ int main(int argc, char **argv)
     ros::AsyncSpinner spinner(4); // for ros control hardware interface
     spinner.start();
 
-    ros::Rate rate(cyclic_data_rate); // 100 hz
+    ros::Rate rate(cyclic_data_rate);
     while (!ros::isShuttingDown())
     {
         services_object.RefreshFeedback(req, res);
@@ -253,7 +253,7 @@ int main(int argc, char **argv)
 
             base_feedback.actuators.push_back(temp);
 
-            joint_state.name[i] = "Actuator" + std::to_string(i + 1);
+            joint_state.name[i] = "joint_" + std::to_string(i + 1);
             joint_state.position[i] =  TO_RAD(res.output.actuators[i].position);
             joint_state.velocity[i] = TO_RAD(res.output.actuators[i].velocity);
             joint_state.effort[i] = res.output.actuators[i].torque;
