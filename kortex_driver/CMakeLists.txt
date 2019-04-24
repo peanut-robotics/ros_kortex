@@ -6,7 +6,7 @@ add_compile_options(-std=c++11)
 add_definitions(-D_OS_UNIX)
 
 ## find catkin and any catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs message_generation)
+find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs message_generation controller_manager hardware_interface angles)
 
 file(GLOB_RECURSE cpp_list RELATIVE ${PROJECT_SOURCE_DIR} "src/*.cpp")
 

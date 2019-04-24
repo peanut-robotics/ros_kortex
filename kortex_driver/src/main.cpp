@@ -189,6 +189,9 @@ int main(int argc, char **argv)
 
     sensor_msgs::JointState joint_state;
 
+    ros::AsyncSpinner spinner(4); // for ros control hardware interface
+    spinner.start();
+
     ros::Rate rate(cyclic_data_rate); // 100 hz
     while (!ros::isShuttingDown())
     {
@@ -257,7 +260,9 @@ int main(int argc, char **argv)
         }
         base_feedback.interconnect.position = res.output.interconnect.position;
 
-
+        services_object.khi->read();
+        services_object.khi->update();
+        services_object.khi->write();
 
         joint_state.header.stamp = ros::Time::now();
         joint_state.header.frame_id = std::to_string(res.output.frame_id);
