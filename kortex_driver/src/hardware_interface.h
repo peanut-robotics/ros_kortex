@@ -42,7 +42,7 @@ namespace kortex_hardware_interface
     BaseClient* m_base;
     BaseCyclicClient* m_basecyclic;
 
-    std::vector<std::string> joint_names = {"Actuator1", "Actuator2","Actuator3", "Actuator4","Actuator5", "Actuator6","Actuator7"};
+    std::vector<std::string> joint_names = {"joint_1, joint_2, joint_3, joint_4, joint_5, joint_6, joint_7"};
     int NDOF = joint_names.size();
     double cmd[7];
     double prev_cmd[7];
