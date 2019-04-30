@@ -87,7 +87,7 @@
       </collision>
     </link>
     <joint
-      name="joint_1"
+      name="Actuator1"
       type="continuous">
       <origin
         xyz="6.1995E-05 0 0.15643"
@@ -143,7 +143,7 @@
       </collision>
     </link>
     <joint
-      name="joint_2"
+      name="Actuator2"
       type="revolute">
       <origin
         xyz="0 0.005375 -0.12838"
@@ -201,7 +201,7 @@
       </collision>
     </link>
     <joint
-      name="joint_3"
+      name="Actuator3"
       type="continuous">
       <origin
         xyz="0 -0.21038 -0.006375"
@@ -257,7 +257,7 @@
       </collision>
     </link>
     <joint
-      name="joint_4"
+      name="Actuator4"
       type="revolute">
       <origin
         xyz="0 0.006375 -0.21038"
@@ -315,7 +315,7 @@
       </collision>
     </link>
     <joint
-      name="joint_5"
+      name="Actuator5"
       type="continuous">
       <origin
         xyz="0 -0.20843 -0.006375"
@@ -371,7 +371,7 @@
       </collision>
     </link>
     <joint
-      name="joint_6"
+      name="Actuator6"
       type="revolute">
       <origin
         xyz="0 0.00017505 -0.10593"
@@ -429,7 +429,7 @@
       </collision>
     </link>
     <joint
-      name="joint_7"
+      name="Actuator7"
       type="continuous">
       <origin
         xyz="0 -0.10593 -0.00017505"
