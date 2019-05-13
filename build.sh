@@ -23,14 +23,7 @@ if [ "${RESULT}" -ne 0 ]; then
     exit $?
 fi
 
-rm -r kortex_api/cpp/linux_gcc_x86-64/include/ src/ros_kortex/kortex_api/include/google/
-RESULT=$?
-if [ "${RESULT}" -ne 0 ]; then
-    echo "ERROR while deleting unused include folder. code = ${RESULT}"
-    exit $?
-fi
-
-cp -R kortex_api/cpp/linux_gcc_x86-64/lib/release/ src/ros_kortex/kortex_api/lib/
+cp -R kortex_api/cpp/linux_gcc_x86-64/lib/ src/ros_kortex/kortex_api/
 RESULT=$?
 if [ "${RESULT}" -ne 0 ]; then
     echo "ERROR while copying the kortex api library. code = ${RESULT}"
@@ -40,7 +33,14 @@ fi
 chmod +x src/ros_kortex/kortex_api/lib/release/libKortexApi.a
 RESULT=$?
 if [ "${RESULT}" -ne 0 ]; then
-    echo "ERROR while executing chmod +x on the kortex api library. code = ${RESULT}"
+    echo "ERROR while executing chmod +x on the kortex api release library. code = ${RESULT}"
+    exit $?
+fi
+
+chmod +x src/ros_kortex/kortex_api/lib/debug/libKortexApi.a
+RESULT=$?
+if [ "${RESULT}" -ne 0 ]; then
+    echo "ERROR while executing chmod +x on the kortex api debug library. code = ${RESULT}"
     exit $?
 fi
 
