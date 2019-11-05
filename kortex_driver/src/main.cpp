@@ -192,6 +192,8 @@ int main(int argc, char **argv)
     ros::AsyncSpinner spinner(4); // for ros control hardware interface
     spinner.start();
 
+    ros::Duration(2).sleep(); // allow ros control to come up before starting to send commands
+
     ros::Rate rate(cyclic_data_rate);
     while (!ros::isShuttingDown())
     {
