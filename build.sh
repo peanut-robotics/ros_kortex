@@ -5,7 +5,14 @@ wget --load-cookies ./cookies.txt "https://drive.google.com/a/kinova.ca/uc?id=1A
 RESULT=$?
 if [ "${RESULT}" -ne 0 ]; then
     echo "ERROR while fetching the kortex api. code = ${RESULT}"
-    exit $?
+    echo "Trying once more..."
+    CONFIRM=$(wget --quiet --save-cookies ./cookies.txt --keep-session-cookies --no-check-certificate "https://drive.google.com/a/kinova.ca/uc?id=1ASbEsulf5cByru8Hy1oBZJyNDBa9H22C&export=download" -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')
+    wget --load-cookies ./cookies.txt "https://drive.google.com/a/kinova.ca/uc?id=1ASbEsulf5cByru8Hy1oBZJyNDBa9H22C&export=download&confirm=$CONFIRM" -O kortex_api-1.1.6.zip
+    RESULT=$?
+    if [ "${RESULT}" -ne 0 ]; then
+      echo "ERROR AGAIN while fetching the kortex api. code = ${RESULT}"
+      exit $?
+    fi
 fi
 
 rm ./cookies.txt
