@@ -1,18 +1,12 @@
 #!/bin/bash
 
+download_api() {
 CONFIRM=$(wget --quiet --save-cookies ./cookies.txt --keep-session-cookies --no-check-certificate "https://drive.google.com/a/kinova.ca/uc?id=1ASbEsulf5cByru8Hy1oBZJyNDBa9H22C&export=download" -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')
 wget --load-cookies ./cookies.txt "https://drive.google.com/a/kinova.ca/uc?id=1ASbEsulf5cByru8Hy1oBZJyNDBa9H22C&export=download&confirm=$CONFIRM" -O kortex_api-1.1.6.zip
 RESULT=$?
 if [ "${RESULT}" -ne 0 ]; then
     echo "ERROR while fetching the kortex api. code = ${RESULT}"
-    echo "Trying once more..."
-    CONFIRM=$(wget --quiet --save-cookies ./cookies.txt --keep-session-cookies --no-check-certificate "https://drive.google.com/a/kinova.ca/uc?id=1ASbEsulf5cByru8Hy1oBZJyNDBa9H22C&export=download" -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')
-    wget --load-cookies ./cookies.txt "https://drive.google.com/a/kinova.ca/uc?id=1ASbEsulf5cByru8Hy1oBZJyNDBa9H22C&export=download&confirm=$CONFIRM" -O kortex_api-1.1.6.zip
-    RESULT=$?
-    if [ "${RESULT}" -ne 0 ]; then
-      echo "ERROR AGAIN while fetching the kortex api. code = ${RESULT}"
-      exit $?
-    fi
+    exit $?
 fi
 
 rm ./cookies.txt
@@ -21,6 +15,19 @@ RESULT=$?
 if [ "${RESULT}" -ne 0 ]; then
     echo "ERROR while extracting the kortex api. code = ${RESULT}"
     exit $?
+fi
+}
+
+download_api
+RESULT=$?
+if [ "${RESULT}" -ne 0 ]; then
+    echo "ERROR while extracting the kortex api. code = ${RESULT}"
+    rm -rf kortex_api*
+    download_api
+    if [ "${RESULT}" -ne 0 ]; then
+      echo "ERROR while extracting the kortex api. code = ${RESULT}"
+      exit $?
+    fi
 fi
 
 cp -R kortex_api/cpp/linux_gcc_x86-64/include/ src/ros_kortex/kortex_api/
