@@ -1,7 +1,8 @@
 #!/bin/bash
 
-CONFIRM=$(wget --quiet --save-cookies ./cookies.txt --keep-session-cookies --no-check-certificate "https://drive.google.com/a/kinova.ca/uc?id=1ASbEsulf5cByru8Hy1oBZJyNDBa9H22C&export=download" -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')
-wget --load-cookies ./cookies.txt "https://drive.google.com/a/kinova.ca/uc?id=1ASbEsulf5cByru8Hy1oBZJyNDBa9H22C&export=download&confirm=$CONFIRM" -O kortex_api-1.1.6.zip
+download_api() {
+# download from PEANUT ROBOTICS' GOOGLE DRIVE FOLDER
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1YyGH-rXBljg7PcW-OQ0DK7YodBBblLwv' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1YyGH-rXBljg7PcW-OQ0DK7YodBBblLwv" -O kortex_api-1.1.6.zip && rm -rf /tmp/cookies.txt
 RESULT=$?
 if [ "${RESULT}" -ne 0 ]; then
     echo "ERROR while fetching the kortex api. code = ${RESULT}"
@@ -14,6 +15,19 @@ RESULT=$?
 if [ "${RESULT}" -ne 0 ]; then
     echo "ERROR while extracting the kortex api. code = ${RESULT}"
     exit $?
+fi
+}
+
+download_api
+RESULT=$?
+if [ "${RESULT}" -ne 0 ]; then
+    echo "ERROR while extracting the kortex api. code = ${RESULT}"
+    rm -rf kortex_api*
+    download_api
+    if [ "${RESULT}" -ne 0 ]; then
+      echo "ERROR while extracting the kortex api. code = ${RESULT}"
+      exit $?
+    fi
 fi
 
 cp -R kortex_api/cpp/linux_gcc_x86-64/include/ src/ros_kortex/kortex_api/
