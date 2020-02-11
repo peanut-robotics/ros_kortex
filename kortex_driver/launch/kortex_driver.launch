@@ -8,8 +8,7 @@
     <arg name="machine" default="peanut" doc="peanut or single"/>
 
     <!-- launch nodes on correct machines, determined by the env variable -->
-    <include file="$(find peanut_bringup)/config/$(arg machine).machine"
-             if="$(arg independent)"/>
+    <include file="$(find peanut_bringup)/config/$(arg machine).machine"/>
 
     <!-- Kortex API options -->
     <arg name="ip_address" default="192.168.1.10"/>
