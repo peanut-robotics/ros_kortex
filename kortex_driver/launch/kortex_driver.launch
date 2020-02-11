@@ -5,6 +5,11 @@
     <arg name="arm" default="gen3"/> <!-- gen3 is the only supported arm for now -->
     <arg name="gripper" default=""/> <!-- "robotiq_2f_85" is the only supported gripper for now, as well as no gripper ("") -->
     <arg name="robot_name" default="my_$(arg arm)"/>
+    <arg name="machine" default="peanut" doc="peanut or single"/>
+
+    <!-- launch nodes on correct machines, determined by the env variable -->
+    <include file="$(find peanut_bringup)/config/$(arg machine).machine"
+             if="$(arg independent)"/>
 
     <!-- Kortex API options -->
     <arg name="ip_address" default="192.168.1.10"/>
@@ -32,7 +37,7 @@
             unless="$(eval not arg('gripper'))"/>
 
         <!-- Start the kortex_driver node -->
-        <node name="$(arg robot_name)_driver" pkg="kortex_driver" type="kortex_arm_driver" output="screen"> <!--launch-prefix="gdb -ex run args"-->
+        <node name="$(arg robot_name)_driver" pkg="kortex_driver" type="kortex_arm_driver" output="screen" machine="arm_rpi"> <!--launch-prefix="gdb -ex run args"-->
             <param name="ip_address" value="$(arg ip_address)"/>
             <param name="cyclic_data_publish_rate" value="$(arg cyclic_data_publish_rate)"/>
             <param name="api_rpc_timeout_ms" value="$(arg api_rpc_timeout_ms)"/>
